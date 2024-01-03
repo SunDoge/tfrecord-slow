@@ -1,0 +1,29 @@
+[project]
+name = "tfrecord-slow"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "SunDoge", email = "384813529@qq.com"},
+]
+dependencies = [
+    "safetensors>=0.4.1",
+    "crc32c>=2.3.post0",
+    "msgspec>=0.18.5",
+]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+package-type = "library"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "numpy>=1.24.4",
+    "ipdb>=0.13.13",
+]
