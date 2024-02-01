@@ -3,10 +3,7 @@ from tqdm import tqdm
 import numpy as np
 import msgspec
 from tfrecord_slow.msgpack import NdArray
-
-
-class Message(msgspec.Struct):
-    x: NdArray
+from .common import Message
 
 
 def bench(n: int = 1000):
