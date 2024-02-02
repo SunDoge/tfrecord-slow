@@ -4,11 +4,14 @@ import numpy as np
 
 
 class NdArray(msgspec.Struct):
-    data: memoryview
+    data: bytearray  # Make it mutable.
     dtype: str
     shape: List[int]
 
     def to_numpy(self):
+        """
+        Attention!!! the internal buffer is mutable
+        """
         return np.frombuffer(self.data, np.dtype(self.dtype)).reshape(self.shape)
 
     @classmethod

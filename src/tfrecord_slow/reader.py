@@ -1,10 +1,13 @@
 import io
 from typing import Optional
 import struct
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class TfRecordReader:
-    def __init__(self, file: io.FileIO, check_integrity: bool = False) -> None:
+    def __init__(self, file: io.BufferedIOBase, check_integrity: bool = False) -> None:
         self._file = file
         self._check_integrity = check_integrity
 
@@ -17,6 +20,7 @@ class TfRecordReader:
         return cls(open(path, "rb"), check_integrity=check_integrity)
 
     def close(self):
+        logger.debug("Close file: %s", self._file)
         self._file.close()
 
     def read(self) -> Optional[memoryview]:
