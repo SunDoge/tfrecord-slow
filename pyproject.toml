@@ -19,8 +19,7 @@ build-backend = "pdm.backend"
 
 
 [tool.pdm]
-package-type = "library"
-
+distribution = true
 [tool.pdm.dev-dependencies]
 dev = [
     "numpy>=1.24.4",
