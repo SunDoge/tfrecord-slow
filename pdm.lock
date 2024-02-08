@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:dfbcde44ebd24424353375b4a9fbaf4313a5b31e818472249f45023a788edddb"
+content_hash = "sha256:3e67a1d3e5ca0937cd4806da4d0f2dbf54c69872f009cbcd5548c5e8ed55d478"
 
 [[package]]
 name = "asttokens"
@@ -264,7 +264,7 @@ name = "numpy"
 version = "1.26.3"
 requires_python = ">=3.9"
 summary = "Fundamental package for array computing in Python"
-groups = ["dev"]
+groups = ["default"]
 files = [
     {file = "numpy-1.26.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:806dd64230dbbfaca8a27faa64e2f414bf1c6622ab78cc4264f7f5f028fee3bf"},
     {file = "numpy-1.26.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:02f98011ba4ab17f46f80f7f8f1c291ee7d855fcef0a5a98db80767a468c85cd"},

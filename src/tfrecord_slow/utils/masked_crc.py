@@ -11,3 +11,5 @@ def make_masked_crc(data: bytes) -> bytes:
     masked = ((crc >> 15) | (crc << 17)) + MASK
     masked_bytes = struct.pack("<I", masked & UINT32_MAX)
     return masked_bytes
+
+

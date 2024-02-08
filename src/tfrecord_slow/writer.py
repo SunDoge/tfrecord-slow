@@ -1,6 +1,6 @@
 import struct
 import io
-from .utils import make_masked_crc
+from .utils.masked_crc import make_masked_crc
 from typing import Dict, Any
 import safetensors
 
