@@ -25,6 +25,7 @@ jobs:
         uses: eifinger/setup-rye@v1
         with:
           enable-cache: true
+          cache-prefix: "py${{ matrix.python-version }}"
 
       - name: python version
         run: rye pin ${{ matrix.python-version }}
