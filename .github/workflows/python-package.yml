@@ -5,13 +5,12 @@ name: Python package
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -19,17 +18,19 @@ jobs:
         python-version: ["3.9", "3.10", "3.11"]
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup pdm
-      uses: pdm-project/setup-pdm@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: true
-        
-    - name: Install dependencies
-      run: pdm install
-      
-    - name: Test with pytest
-      run: |
-        pdm run pytest
+      - name: Setup rye
+        id: setup-rye
+        uses: eifinger/setup-rye@v1
+        with:
+          enable-cache: true
+
+      - name: python version
+        run: rye pin ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: rye sync
+
+      - name: Test with pytest
+        run: rye run pytest
