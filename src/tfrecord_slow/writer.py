@@ -1,12 +1,10 @@
 import struct
-import io
+from io import BufferedIOBase
 from .utils.masked_crc import make_masked_crc
-from typing import Dict, Any
-import safetensors
 
 
 class TfRecordWriter:
-    def __init__(self, file: io.FileIO) -> None:
+    def __init__(self, file: BufferedIOBase) -> None:
         self._file = file
 
     @classmethod

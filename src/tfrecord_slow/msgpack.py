@@ -4,7 +4,7 @@ import numpy as np
 
 
 class NdArray(msgspec.Struct):
-    data: bytearray  # Make it mutable.
+    data: memoryview  # Make it mutable.
     dtype: str
     shape: List[int]
 
@@ -28,17 +28,3 @@ class NdArray(msgspec.Struct):
     def from_memoryview(cls, buf: memoryview, copy: bool = False):
         bbuf = bytearray(buf) if copy else buf.cast("B")
         return cls(bbuf, "|u1", [len(bbuf)])
-
-
-def enc_hook(obj):
-    if isinstance(obj, np.ndarray):
-        return NdArray.from_numpy(obj)
-    else:
-        raise NotImplementedError
-
-
-def dec_hook(ty, obj):
-    if ty is np.ndarray:
-        return np.frombuffer(obj["data"], np.dtype(obj["dtype"])).reshape(obj["shape"])
-    else:
-        raise NotImplementedError
