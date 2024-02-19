@@ -22,3 +22,5 @@ pluggy==1.4.0
     # via pytest
 pytest==8.0.1
 safetensors==0.4.2
+typed-args==0.6.4
+    # via tfrecord-slow
