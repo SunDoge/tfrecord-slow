@@ -43,12 +43,13 @@ class MsgpackTfrecordLoader:
         self.datapipe = datapipe
         self.check_integrity = check_integrity
         self.func = func
-        self.decoder = msgspec.msgpack.Decoder(type=spec)
+        self.spec = spec
 
     def __iter__(self) -> Iterator[T]:
+        decoder = msgspec.msgpack.Decoder(type=self.spec)
         for fp in self.datapipe:
             reader = TfRecordReader(fp, check_integrity=self.check_integrity)
             for buf in reader:
-                record = self.decoder.decode(buf)
+                record = decoder.decode(buf)
                 example = self.func(record)
                 yield example

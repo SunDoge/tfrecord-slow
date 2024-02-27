@@ -1,6 +1,6 @@
 [project]
 name = "tfrecord-slow"
-version = "0.3.0"
+version = "0.3.1"
 description = "Default template for PDM package"
 authors = [
     { name = "SunDoge", email = "triplez0@outlook.com" }
