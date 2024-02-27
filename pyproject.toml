@@ -25,7 +25,7 @@ managed = true
 dev-dependencies = [
     "safetensors>=0.4.2",
     "pytest>=8.0.1",
-    "ipython>=8.22.1",
+    "ipython>=8",
 ]
 
 [tool.hatch.metadata]
