@@ -1,6 +1,6 @@
 [project]
 name = "tfrecord-slow"
-version = "0.2.0"
+version = "0.3.0"
 description = "Default template for PDM package"
 authors = [
     { name = "SunDoge", email = "triplez0@outlook.com" }
@@ -25,6 +25,7 @@ managed = true
 dev-dependencies = [
     "safetensors>=0.4.2",
     "pytest>=8.0.1",
+    "ipython>=8.22.1",
 ]
 
 [tool.hatch.metadata]

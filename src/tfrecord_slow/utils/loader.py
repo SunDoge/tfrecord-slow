@@ -1,6 +1,7 @@
-from typing import TypeVar, Iterable, Iterator, Callable
+from typing import TypeVar, Iterable, Iterator, Callable, Type
 from io import BufferedIOBase
 from tfrecord_slow.reader import TfRecordReader
+import msgspec
 
 T = TypeVar("T")
 
@@ -9,7 +10,7 @@ def _default_func(buf: memoryview):
     return buf.tobytes()
 
 
-class TfRecordLoader:
+class RawTfrecordLoader:
     def __init__(
         self,
         datapipe: Iterable[BufferedIOBase],
@@ -25,4 +26,29 @@ class TfRecordLoader:
             reader = TfRecordReader(fp, check_integrity=self.check_integrity)
             for buf in reader:
                 example = self.func(buf)
+                yield example
+
+
+S = TypeVar("S", bound=msgspec.Struct)
+
+
+class MsgpackTfrecordLoader:
+    def __init__(
+        self,
+        datapipe: Iterable[BufferedIOBase],
+        spec: Type[S],
+        func: Callable[[S], T],
+        check_integrity: bool = False,
+    ):
+        self.datapipe = datapipe
+        self.check_integrity = check_integrity
+        self.func = func
+        self.spec = spec
+
+    def __iter__(self) -> Iterator[T]:
+        for fp in self.datapipe:
+            reader = TfRecordReader(fp, check_integrity=self.check_integrity)
+            for buf in reader:
+                record = msgspec.msgpack.decode(buf, type=self.spec)
+                example = self.func(record)
                 yield example
