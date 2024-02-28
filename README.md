@@ -1,6 +1,6 @@
 # tfrecord-slow
 
-TFRecord reader and writer without 
+TFRecord reader and writer without protobuf.
 
 ## Install
 
