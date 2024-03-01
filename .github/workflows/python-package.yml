@@ -31,7 +31,7 @@ jobs:
         run: rye pin ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: rye sync
+        run: rye sync --all-features
 
       - name: Test with pytest
         run: rye run pytest

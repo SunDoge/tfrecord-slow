@@ -27,10 +27,8 @@ jobs:
         uses: eifinger/setup-rye@v1
         with:
           enable-cache: true
-          cache-prefix: "py${{ matrix.python-version }}"
 
       - name: Publish package
         run: |
-          rye sync
           rye build --clean
           rye publish --token ${{ secrets.PYPI_API_TOKEN }} --yes
