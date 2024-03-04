@@ -7,25 +7,23 @@ import logging
 from pathlib import Path
 from typing import Optional
 from .reader import TfRecordReader
-
-logger = logging.getLogger(__name__)
+from loguru import logger
+from tqdm import tqdm
 
 
 def get_args():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
-
-    count_parser = subparsers.add_parser("count")
-    count_parser.set_defaults(func=count)
-    count_parser.add_argument(
-        "path", type=Path, help="Path to tfrecord file or directory."
-    )
-    count_parser.add_argument("-m", "--mask", action="store_const", const="*.tfrec")
-    count_parser.add_argument(
-        "-c", "--check", action="store_true", help="Check integrity."
-    )
+    add_count_args(subparsers.add_parser("count"))
 
     return parser.parse_args()
+
+
+def add_count_args(parser: argparse.ArgumentParser):
+    parser.set_defaults(func=count)
+    parser.add_argument("path", type=Path, help="Path to tfrecord file or directory.")
+    parser.add_argument("-m", "--mask", action="store_const", const="*.tfrec")
+    parser.add_argument("-c", "--check", action="store_true", help="Check integrity.")
 
 
 def count(args):
