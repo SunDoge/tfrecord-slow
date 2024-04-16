@@ -3,8 +3,8 @@
 #
 # last locked with the following flags:
 #   pre: false
-#   features: ["msgpack"]
-#   all-features: false
+#   features: []
+#   all-features: true
 #   with-sources: false
 
 -e file:.
@@ -21,8 +21,12 @@ iniconfig==2.0.0
 ipython==8.22.1
 jedi==0.19.1
     # via ipython
+loguru==0.7.2
+    # via tfrecord-slow
 matplotlib-inline==0.1.6
     # via ipython
+msgspec==0.18.6
+    # via tfrecord-slow
 numpy==1.26.4
     # via tfrecord-slow
 packaging==23.2
@@ -47,6 +51,8 @@ six==1.16.0
     # via asttokens
 stack-data==0.6.3
     # via ipython
+tqdm==4.66.2
+    # via tfrecord-slow
 traitlets==5.14.1
     # via ipython
     # via matplotlib-inline
