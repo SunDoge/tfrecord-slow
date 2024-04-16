@@ -37,19 +37,21 @@ class MsgpackTfrecordLoader:
         self,
         datapipe: Iterable[BufferedIOBase],
         spec: Type[S],
-        func: Callable[[S], T],
         check_integrity: bool = False,
     ):
+        """
+        Args:
+            datapipe: iter of files
+            spec: msgspec.Struct, must have owned memory
+        """
         self.datapipe = datapipe
         self.check_integrity = check_integrity
-        self.func = func
         self.spec = spec
 
-    def __iter__(self) -> Iterator[T]:
+    def __iter__(self) -> Iterator[S]:
         decoder = msgspec.msgpack.Decoder(type=self.spec)
         for fp in self.datapipe:
             reader = TfRecordReader(fp, check_integrity=self.check_integrity)
             for buf in reader:
-                record = decoder.decode(buf)
-                example = self.func(record)
+                example = decoder.decode(buf)
                 yield example

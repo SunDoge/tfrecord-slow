@@ -1,11 +1,11 @@
 import numpy as np
 import msgspec
-from tfrecord_slow.msgpack import NdArray
+from tfrecord_slow.msgpack import NdArray, NdArrayView
 
 
 def test_encode_decode():
     x = np.arange(100)
-    arr = NdArray.from_numpy(x)
+    arr = NdArrayView.from_numpy(x)
     buf = msgspec.msgpack.encode(arr)
     assert len(buf) > 0
 

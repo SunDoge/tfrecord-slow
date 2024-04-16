@@ -4,7 +4,7 @@ import numpy as np
 
 
 class NdArray(msgspec.Struct):
-    data: memoryview  # Make it mutable.
+    data: bytearray  # Make it mutable.
     dtype: str
     shape: List[int]
 
@@ -14,17 +14,23 @@ class NdArray(msgspec.Struct):
         """
         return np.frombuffer(self.data, np.dtype(self.dtype)).reshape(self.shape)
 
+    def to_view(self):
+        return NdArrayView(memoryview(self.data), self.dtype, self.shape)
+
+
+class NdArrayView(msgspec.Struct):
+    data: memoryview
+    dtype: str
+    shape: List[int]
+
     @classmethod
-    def from_numpy(cls, arr: np.ndarray, copy: bool = False):
+    def from_numpy(cls, arr: np.ndarray):
         """
         Args:
             arr: numpy ndarray
             copy: copy the memory or keep it as a memoryview
         """
-        data = bytearray(arr.data) if copy else arr.data
-        return cls(data, arr.dtype.str, arr.shape)
+        return cls(arr.data, arr.dtype.str, arr.shape)
 
-    @classmethod
-    def from_memoryview(cls, buf: memoryview, copy: bool = False):
-        bbuf = bytearray(buf) if copy else buf.cast("B")
-        return cls(bbuf, "|u1", [len(bbuf)])
+    def to_owned(self):
+        return NdArray(bytearray(self.data), self.dtype, self.shape)
