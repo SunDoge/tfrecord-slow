@@ -1,4 +1,4 @@
-from typing import TypeVar, Iterable, Iterator, Callable, Type
+from typing import TypeVar, Iterable, Iterator, Generic, Type
 from io import BufferedIOBase
 from tfrecord_slow.reader import TfRecordReader
 import msgspec
@@ -7,7 +7,7 @@ import msgspec
 T = TypeVar("T", bound=msgspec.Struct)
 
 
-class MsgpackTfrecordLoader:
+class MsgpackTfrecordLoader(Generic[T]):
     def __init__(
         self,
         datapipe: Iterable[BufferedIOBase],

@@ -1,4 +1,4 @@
-from typing import TypeVar, Iterable, Iterator, Callable
+from typing import TypeVar, Iterable, Iterator, Callable, Generic
 from io import BufferedIOBase
 from tfrecord_slow.reader import TfRecordReader
 
@@ -9,7 +9,7 @@ def _default_func(buf: memoryview):
     return buf.tobytes()
 
 
-class RawTfrecordLoader:
+class RawTfrecordLoader(Generic[T]):
     def __init__(
         self,
         datapipe: Iterable[BufferedIOBase],

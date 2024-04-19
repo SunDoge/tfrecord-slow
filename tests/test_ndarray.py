@@ -1,6 +1,6 @@
 import numpy as np
 import msgspec
-from tfrecord_slow.msgpack import NdArray, NdArrayView
+from tfrecord_slow.utils.msgpack import NdArray, NdArrayView
 
 
 def test_encode_decode():
