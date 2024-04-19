@@ -36,6 +36,7 @@ dev-dependencies = [
     "safetensors>=0.4.2",
     "pytest>=8.0.1",
     "ipython>=8",
+    "flatbuffers>=24.3.25",
 ]
 
 [tool.hatch.metadata]
