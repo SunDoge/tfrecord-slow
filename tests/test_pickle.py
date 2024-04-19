@@ -1,4 +1,5 @@
-from tfrecord_slow.utils.loader import RawTfrecordLoader, MsgpackTfrecordLoader
+from tfrecord_slow.loaders.msgpack_loader import MsgpackTfrecordLoader
+from tfrecord_slow.loaders.raw_loader import RawTfrecordLoader
 import pickle
 import msgspec
 

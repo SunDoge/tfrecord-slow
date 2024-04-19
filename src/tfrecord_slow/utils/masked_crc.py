@@ -6,10 +6,12 @@ MASK = 0xA282EAD8
 UINT32_MAX = 0xFFFFFFFF
 
 
-def make_masked_crc(data: bytes) -> bytes:
+def make_masked_crc(data: bytes | memoryview) -> bytes:
     crc = np.uint32(crc32c.crc32c(data))
     masked = ((crc >> 15) | (crc << 17)) + MASK
     masked_bytes = struct.pack("<I", masked & UINT32_MAX)
     return masked_bytes
 
 
+def verify_masked_crc(data: bytes | memoryview, expected: bytes | memoryview) -> bool:
+    return make_masked_crc(data) == expected

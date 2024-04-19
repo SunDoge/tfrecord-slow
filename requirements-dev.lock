@@ -10,7 +10,7 @@
 -e file:.
 asttokens==2.4.1
     # via stack-data
-crc32c==2.3.post0
+crc32c==2.4
     # via tfrecord-slow
 decorator==5.1.1
     # via ipython
