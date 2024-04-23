@@ -15,7 +15,7 @@ def parse(buf):
 
 def bench(n: int = 1000):
     # with TfRecordReader.open("/tmp/test_writer.tfrec") as reader:
-    loader = RawTfrecordLoader([open("/tmp/test_writer.tfrec", "rb")], parse)
+    loader = RawTfrecordLoader([open("/tmp/test_fbs_writer.tfrec", "rb")], parse)
     for msg in tqdm(loader, total=n):
         # assert msg.x.to_numpy().shape == (1024, 1024)
         assert msg.shape == (1024, 1024)
