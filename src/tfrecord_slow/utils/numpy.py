@@ -4,7 +4,7 @@ from typing import List, Optional
 
 def from_buffer(
     buf: memoryview,
-    shape: List[int] | None = None,
+    shape: Optional[List[int]] = None,
     dtype: np.dtype = np.uint8,
     copy: bool = True,
 ) -> np.ndarray:
