@@ -1,0 +1,13 @@
+namespace Data;
+
+table NdArray {
+    data: [ubyte];
+    shape: [long];
+    dtype: string;
+}
+
+table Message {
+    x: NdArray; 
+}
+
+root_type Message;

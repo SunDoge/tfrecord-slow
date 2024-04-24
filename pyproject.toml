@@ -1,13 +1,11 @@
 [project]
 name = "tfrecord-slow"
-version = "0.4.0"
+version = "0.5.0"
 description = "Default template for PDM package"
 authors = [
     { name = "SunDoge", email = "triplez0@outlook.com" }
 ]
 dependencies = [
-    "crc32c>=2.3.post0",
-    "numpy>=1",
 ]
 readme = "README.md"
 requires-python = ">= 3.9"
@@ -23,6 +21,10 @@ cli = [
     "loguru>=0.7.2",
     "tqdm>=4.66.2",
 ]
+crc32c = [
+    "numpy>=1",
+    "crc32c>=2.3.post0",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -34,6 +36,7 @@ dev-dependencies = [
     "safetensors>=0.4.2",
     "pytest>=8.0.1",
     "ipython>=8",
+    "flatbuffers>=24.3.25",
 ]
 
 [tool.hatch.metadata]

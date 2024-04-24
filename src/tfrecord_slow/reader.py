@@ -3,13 +3,24 @@ from typing import Optional
 import struct
 import logging
 
+
 logger = logging.getLogger(__name__)
+
+
+def _always_return_true(*args, **kwargs):
+    return True
 
 
 class TfRecordReader:
     def __init__(self, file: io.BufferedIOBase, check_integrity: bool = False) -> None:
         self._file = file
-        self._check_integrity = check_integrity
+
+        if check_integrity:
+            from tfrecord_slow.utils.masked_crc import verify_masked_crc
+
+            self._verify_masked_crc32 = verify_masked_crc
+        else:
+            self._verify_masked_crc32 = _always_return_true
 
         self._length_bytes = bytearray(8)
         self._crc_bytes = bytearray(4)
@@ -33,15 +44,23 @@ class TfRecordReader:
         if self._file.readinto(self._crc_bytes) != 4:
             raise RuntimeError("Invalid tfrecord file: failed to read the start token.")
 
+        if not self._verify_masked_crc32(self._length_bytes, self._crc_bytes):
+            raise RuntimeError("Crc32 check failed.")
+
         (length,) = struct.unpack("<Q", self._length_bytes)
         if length > len(self._data_bytes):
             self._data_bytes = self._data_bytes.zfill(length * 2)
 
         data_bytes_view = memoryview(self._data_bytes)[:length]
+
         if self._file.readinto(data_bytes_view) != length:
             raise RuntimeError("Invalid tfrecord file: failed to read the record.")
         if self._file.readinto(self._crc_bytes) != 4:
             raise RuntimeError("Invalid tfrecord file: failed to read the end token.")
+
+        if not self._verify_masked_crc32(data_bytes_view, self._crc_bytes):
+            raise RuntimeError("Crc32 check failed.")
+
         return data_bytes_view
 
     def __enter__(self):

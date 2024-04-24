@@ -8,7 +8,7 @@
 #   with-sources: false
 
 -e file:.
-crc32c==2.3.post0
+crc32c==2.4
     # via tfrecord-slow
 loguru==0.7.2
     # via tfrecord-slow
