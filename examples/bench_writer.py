@@ -2,7 +2,6 @@ from tfrecord_slow import TfrecordWriter
 from tqdm import tqdm
 import numpy as np
 
-# from safetensors.numpy import save
 import msgspec
 from common import MessageView
 from tfrecord_slow.utils.msgpack import NdArrayView
