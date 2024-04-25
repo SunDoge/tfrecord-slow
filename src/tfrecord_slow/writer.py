@@ -3,7 +3,7 @@ from io import BufferedIOBase
 from .utils.masked_crc import make_masked_crc
 
 
-class TfRecordWriter:
+class TfrecordWriter:
     def __init__(self, file: BufferedIOBase) -> None:
         self._file = file
 

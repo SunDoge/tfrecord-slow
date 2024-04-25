@@ -1,2 +1,2 @@
-from .writer import TfRecordWriter
-from .reader import TfRecordReader
+from .writer import TfrecordWriter
+from .reader import TfrecordReader

@@ -1,4 +1,4 @@
-from tfrecord_slow import TfRecordWriter
+from tfrecord_slow import TfrecordWriter
 from tqdm import tqdm
 import numpy as np
 
@@ -53,7 +53,7 @@ def bench(n: int = 1000):
     x = np.random.rand(1024, 1024)
     # builder = flatbuffers.Builder()
     builder = flexbuffers.Builder()
-    with TfRecordWriter.create("/tmp/test_flex_writer.tfrec") as writer:
+    with TfrecordWriter.create("/tmp/test_flex_writer.tfrec") as writer:
         for _ in tqdm(range(n)):
             writer.write(create_message(builder, x))
 

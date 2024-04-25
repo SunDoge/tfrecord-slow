@@ -1,6 +1,6 @@
 from typing import TypeVar, Iterable, Iterator, Generic, Type
 from io import BufferedIOBase
-from tfrecord_slow.reader import TfRecordReader
+from tfrecord_slow.reader import TfrecordReader
 import msgspec
 
 
@@ -26,7 +26,7 @@ class MsgpackTfrecordLoader(Generic[T]):
     def __iter__(self) -> Iterator[T]:
         decoder = msgspec.msgpack.Decoder(type=self.spec)
         for fp in self.datapipe:
-            reader = TfRecordReader(fp, check_integrity=self.check_integrity)
+            reader = TfrecordReader(fp, check_integrity=self.check_integrity)
             for buf in reader:
                 example = decoder.decode(buf)
                 yield example

@@ -11,7 +11,7 @@ def _always_return_true(*args, **kwargs):
     return True
 
 
-class TfRecordReader:
+class TfrecordReader:
     def __init__(self, file: io.BufferedIOBase, check_integrity: bool = False) -> None:
         self._file = file
 
@@ -77,5 +77,8 @@ class TfRecordReader:
             else:
                 break
 
-    def count(self):
-        return sum(1 for _ in self)
+    def count(self) -> int:
+        n = 0
+        for _ in self:
+            n += 1
+        return n

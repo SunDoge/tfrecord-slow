@@ -1,6 +1,6 @@
 from typing import TypeVar, Iterable, Iterator, Callable, Generic
 from io import BufferedIOBase
-from tfrecord_slow.reader import TfRecordReader
+from tfrecord_slow.reader import TfrecordReader
 
 T = TypeVar("T")
 
@@ -22,7 +22,7 @@ class RawTfrecordLoader(Generic[T]):
 
     def __iter__(self) -> Iterator[T]:
         for fp in self.datapipe:
-            reader = TfRecordReader(fp, check_integrity=self.check_integrity)
+            reader = TfrecordReader(fp, check_integrity=self.check_integrity)
             for buf in reader:
                 example = self.func(buf)
                 yield example
