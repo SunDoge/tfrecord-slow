@@ -24,7 +24,7 @@ jobs:
 
       - name: Setup rye
         id: setup-rye
-        uses: eifinger/setup-rye@v1
+        uses: eifinger/setup-rye@v2
 
       - name: Publish package
         run: |
