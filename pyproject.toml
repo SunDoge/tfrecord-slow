@@ -23,7 +23,7 @@ cli = [
 ]
 crc32c = [
     "numpy>=1",
-    "crc32c>=2.3.post0",
+    "crc32c>=2.4",
 ]
 
 [build-system]
