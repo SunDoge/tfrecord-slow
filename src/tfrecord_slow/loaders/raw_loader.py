@@ -6,7 +6,7 @@ T = TypeVar("T")
 
 
 def _default_func(buf: memoryview):
-    return buf.tobytes()
+    return buf
 
 
 class RawTfrecordLoader(Generic[T]):

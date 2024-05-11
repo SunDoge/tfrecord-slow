@@ -1,6 +1,6 @@
 [project]
 name = "tfrecord-slow"
-version = "0.5.1"
+version = "0.6.0"
 description = "TFRecord reader and writer without protobuf."
 authors = [
     { name = "SunDoge", email = "triplez0@outlook.com" }
